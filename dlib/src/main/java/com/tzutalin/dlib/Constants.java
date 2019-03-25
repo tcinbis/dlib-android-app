@@ -14,6 +14,7 @@ public final class Constants {
 
     /**
      * getFaceShapeModelPath
+     *
      * @return default face shape model path
      */
     public static String getFaceShapeModelPath() {

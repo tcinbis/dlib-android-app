@@ -1,6 +1,6 @@
 /*
-*  Copyright (C) 2015-present TzuTaLin
-*/
+ *  Copyright (C) 2015-present TzuTaLin
+ */
 
 package com.tzutalin.dlibtest;
 
@@ -72,6 +72,34 @@ public class MainActivity extends AppCompatActivity {
     private PedestrianDet mPersonDet;
     private List<Card> mCard = new ArrayList<>();
 
+    /**
+     * Checks if the app has permission to write to device storage or open camera
+     * If the app does not has permission then the user will be prompted to grant permissions
+     *
+     * @param activity
+     */
+    @DebugLog
+    private static boolean verifyPermissions(Activity activity) {
+        // Check if we have write permission
+        int write_permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        int read_persmission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        int camera_permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.CAMERA);
+
+        if (write_permission != PackageManager.PERMISSION_GRANTED ||
+                read_persmission != PackageManager.PERMISSION_GRANTED ||
+                camera_permission != PackageManager.PERMISSION_GRANTED) {
+            // We don't have permission so prompt the user
+            ActivityCompat.requestPermissions(
+                    activity,
+                    PERMISSIONS_REQ,
+                    REQUEST_CODE_PERMISSION
+            );
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,34 +145,6 @@ public class MainActivity extends AppCompatActivity {
 
         mToolbar.setTitle(getString(R.string.app_name));
         Toast.makeText(MainActivity.this, getString(R.string.description_info), Toast.LENGTH_LONG).show();
-    }
-
-    /**
-     * Checks if the app has permission to write to device storage or open camera
-     * If the app does not has permission then the user will be prompted to grant permissions
-     *
-     * @param activity
-     */
-    @DebugLog
-    private static boolean verifyPermissions(Activity activity) {
-        // Check if we have write permission
-        int write_permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        int read_persmission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        int camera_permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.CAMERA);
-
-        if (write_permission != PackageManager.PERMISSION_GRANTED ||
-                read_persmission != PackageManager.PERMISSION_GRANTED ||
-                camera_permission != PackageManager.PERMISSION_GRANTED) {
-            // We don't have permission so prompt the user
-            ActivityCompat.requestPermissions(
-                    activity,
-                    PERMISSIONS_REQ,
-                    REQUEST_CODE_PERMISSION
-            );
-            return false;
-        } else {
-            return true;
-        }
     }
 
     /* Checks if external storage is available for read and write */

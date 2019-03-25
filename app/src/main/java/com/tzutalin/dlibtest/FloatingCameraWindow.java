@@ -41,22 +41,18 @@ import java.lang.ref.WeakReference;
  */
 public class FloatingCameraWindow {
     private static final String TAG = "FloatingCameraWindow";
+    private static final boolean DEBUG = true;
     private Context mContext;
     private WindowManager.LayoutParams mWindowParam;
     private WindowManager mWindowManager;
     private FloatCamView mRootView;
     private Handler mUIHandler;
-
     private int mWindowWidth;
     private int mWindowHeight;
-
     private int mScreenMaxWidth;
     private int mScreenMaxHeight;
-
     private float mScaleWidthRatio = 1.0f;
     private float mScaleHeightRatio = 1.0f;
-
-    private static final boolean DEBUG = true;
 
     public FloatingCameraWindow(Context context) {
         mContext = context;
@@ -185,8 +181,8 @@ public class FloatingCameraWindow {
 
     @UiThread
     private final class FloatCamView extends FrameLayout {
-        private WeakReference<FloatingCameraWindow> mWeakRef;
         private static final int MOVE_THRESHOLD = 10;
+        private WeakReference<FloatingCameraWindow> mWeakRef;
         private int mLastX;
         private int mLastY;
         private int mFirstX;
@@ -217,7 +213,7 @@ public class FloatingCameraWindow {
             mFPSText.setVisibility(View.GONE);
             mInfoText.setVisibility(View.GONE);
 
-            int colorMaxWidth = (int) (mWindowWidth* window.mScaleWidthRatio);
+            int colorMaxWidth = (int) (mWindowWidth * window.mScaleWidthRatio);
             int colorMaxHeight = (int) (mWindowHeight * window.mScaleHeightRatio);
 
             mColorView.getLayoutParams().width = colorMaxWidth;

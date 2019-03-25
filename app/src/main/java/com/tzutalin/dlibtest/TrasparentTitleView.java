@@ -26,10 +26,10 @@ import android.view.View;
 
 public class TrasparentTitleView extends View {
     private static final float TEXT_SIZE_DIP = 24;
-    private String mShowText;
     private final float mTextSizePx;
     private final Paint mFgPaint;
     private final Paint mBgPaint;
+    private String mShowText;
 
     public TrasparentTitleView(final Context context, final AttributeSet set) {
         super(context, set);

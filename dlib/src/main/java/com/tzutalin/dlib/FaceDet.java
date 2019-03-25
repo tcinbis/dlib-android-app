@@ -17,11 +17,6 @@ import java.util.List;
 public class FaceDet {
     private static final String TAG = "dlib";
 
-    // accessed by native methods
-    @SuppressWarnings("unused")
-    private long mNativeFaceDetContext;
-    private String mLandMarkPath = "";
-
     static {
         try {
             System.loadLibrary("android_dlib");
@@ -32,6 +27,11 @@ public class FaceDet {
         }
     }
 
+    // accessed by native methods
+    @SuppressWarnings("unused")
+    private long mNativeFaceDetContext;
+    private String mLandMarkPath = "";
+
     @SuppressWarnings("unused")
     public FaceDet() {
         jniInit(mLandMarkPath);
@@ -41,6 +41,9 @@ public class FaceDet {
         mLandMarkPath = landMarkPath;
         jniInit(mLandMarkPath);
     }
+
+    @Keep
+    private native static void jniNativeClassInit();
 
     @Nullable
     @WorkerThread
@@ -65,9 +68,6 @@ public class FaceDet {
     public void release() {
         jniDeInit();
     }
-
-    @Keep
-    private native static void jniNativeClassInit();
 
     @Keep
     private synchronized native int jniInit(String landmarkModelPath);

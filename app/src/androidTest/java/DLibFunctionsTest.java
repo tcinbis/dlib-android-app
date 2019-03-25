@@ -30,7 +30,7 @@ public class DLibFunctionsTest {
         for (final VisionDetRet ret : results) {
             String label = ret.getLabel();
             int rectLeft = ret.getLeft();
-            int rectTop= ret.getTop();
+            int rectTop = ret.getTop();
             int rectRight = ret.getRight();
             int rectBottom = ret.getBottom();
         }
