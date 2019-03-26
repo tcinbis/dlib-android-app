@@ -30,6 +30,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.WindowManager.LayoutParams;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -125,7 +126,7 @@ public class FloatingCameraWindow {
     private WindowManager.LayoutParams initWindowParameter() {
         mWindowParam = new WindowManager.LayoutParams();
 
-        mWindowParam.type = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
+        mWindowParam.type = LayoutParams.TYPE_APPLICATION_OVERLAY;
         mWindowParam.format = 1;
         mWindowParam.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
         mWindowParam.flags = mWindowParam.flags | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH;
